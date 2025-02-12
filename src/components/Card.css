@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.weather-card {
+    width: 380px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    color: #333;
+    margin: 50px auto;
+    background: linear-gradient(135deg, #d3e0ea, #f1f6f9);
+}
+
+.weather-card:hover {
+    transform: scale(1.03);
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #bbb;
+    outline: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #4a6fa5;
+}
+
+.search-bar button {
+    background-color: #4a6fa5;
+    color: white;
+    font-size: 16px;
+    padding: 10px 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.search-bar button:hover {
+    background-color: #3b5c8f;
+}
+
+.weather-icon {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.temperature {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #4a6fa5;
+}
+
+.feels-like {
+    font-size: 16px;
+    opacity: 0.8;
+    color: #5a5a5a;
+}
+
+.weather-type {
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+    color: #3b5c8f;
+}
+
+.weather-details {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 14px;
+    text-align: left;
+    color: #444;
+}
+
+.weather-details p {
+    margin: 5px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
