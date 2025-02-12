@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Card.css";
-import logo from "./weatherlogo.png";
+import { Sun, CloudRain, Wind, Droplet, Thermometer, Eye, Sunrise, Sunset } from "lucide-react";
 
 export default function Card() {
   const [weather, setWeather] = useState({
@@ -13,10 +13,13 @@ export default function Card() {
     visibility: "-",
     sunrise: "-",
     sunset: "-",
+    dew_point: "-",
+    uv_index: "-",
   });
 
-  const [icon, setIcon] = useState(logo);
+  const [icon, setIcon] = useState("https://openweathermap.org/img/wn/01d@2x.png");
   const [city, setCity] = useState("");
+  const [background, setBackground] = useState("clear");
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp * 1000);
@@ -29,7 +32,6 @@ export default function Card() {
 
   const searchTemp = async (event) => {
     event.preventDefault();
-
     if (!city) {
       alert("Please enter a city name.");
       return;
@@ -53,9 +55,12 @@ export default function Card() {
           visibility: data.visibility / 1000 + " km",
           sunrise: formatTime(data.sys.sunrise),
           sunset: formatTime(data.sys.sunset),
+          dew_point: "-", // OpenWeatherMap free API does not provide dew point
+          uv_index: "-", // Need another API for UV index
         });
 
         setIcon(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+        setBackground(data.weather[0].main.toLowerCase());
       }
     } catch (error) {
       console.error(error);
@@ -63,14 +68,9 @@ export default function Card() {
   };
 
   return (
-    <div className="weather-card">
+    <div className={`weather-card ${background}`}>
       <form className="search-bar" onSubmit={searchTemp}>
-        <input
-          type="text"
-          placeholder="Enter city name..."
-          onChange={citySearch}
-          value={city}
-        />
+        <input type="text" placeholder="Enter city name..." onChange={citySearch} value={city} />
         <button type="submit">🔍</button>
       </form>
 
@@ -81,12 +81,12 @@ export default function Card() {
       <h3 className="weather-type">{weather.weather_type}</h3>
 
       <div className="weather-details">
-        <p>💨 Wind Speed: {weather.wind_speed} km/h</p>
-        <p>💧 Humidity: {weather.humidity}%</p>
-        <p>📌 Pressure: {weather.pressure} hPa</p>
-        <p>👀 Visibility: {weather.visibility}</p>
-        <p>🌅 Sunrise: {weather.sunrise}</p>
-        <p>🌇 Sunset: {weather.sunset}</p>
+        <p><Wind size={16} /> Wind Speed: {weather.wind_speed} km/h</p>
+        <p><Droplet size={16} /> Humidity: {weather.humidity}%</p>
+        <p><Thermometer size={16} /> Pressure: {weather.pressure} hPa</p>
+        <p><Eye size={16} /> Visibility: {weather.visibility}</p>
+        <p><Sunrise size={16} /> Sunrise: {weather.sunrise}</p>
+        <p><Sunset size={16} /> Sunset: {weather.sunset}</p>
       </div>
     </div>
   );
